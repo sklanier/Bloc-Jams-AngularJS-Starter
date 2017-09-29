@@ -1,6 +1,6 @@
 (function() {
 	 function AlbumCtrl() {
-		 //refactored "Album View" code goes HERE
+		 this.albumData = angular.copy(albumPicasso);
 	 }
 
 	 angular
