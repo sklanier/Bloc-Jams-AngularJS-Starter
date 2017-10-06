@@ -27,7 +27,16 @@
 
 				currentSong = song;
 		  };
-
+		  /**
+			* @function playSong
+			* @desc Plays current Buzz object and sets playing property of song object to 'true'
+			* @param {Object} song
+			*/
+		  var playSong = function(song) {
+				currentBuzzObject.play();
+				song.playing = true;
+			};
+		 
 			SongPlayer.play = function(song) {
 				if (currentSong !== song) {
 					setSong(song);
