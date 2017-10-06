@@ -1,10 +1,10 @@
 (function() {
-	 function AlbumCtrl(Fixtures) {
-		 //refactored "Album View" code goes HERE
+	 function AlbumCtrl(Fixtures, SongPlayer) {
 		 this.albumData = Fixtures.getAlbum();
+		 this.songPlayer = SongPlayer;
 	 }
 
 	 angular
 			 .module('blocJams')
-			 .controller('AlbumCtrl', ['Fixtures', AlbumCtrl]);
+			 .controller('AlbumCtrl', ['Fixtures', 'SongPlayer', AlbumCtrl]);
 })();
