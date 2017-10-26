@@ -1,5 +1,5 @@
 (function() {
-    function SongPlayer(Fixtures) {
+    function SongPlayer($rootScope, Fixtures) {
         var SongPlayer = {};
         
 //        @desc which album is playing, for use in next and previous buttons
@@ -22,6 +22,13 @@
                 formats: ['mp3'],
                 preload: true
             });
+			
+			currentBuzzObject.bind('timeupdate', function() {
+				$rootScope.$apply(function() {
+					SongPlayer.currentTime = currentBuzzObject.getTime();
+				});
+			});
+
             
             SongPlayer.currentSong = song;
         };
@@ -58,7 +65,13 @@
 //        @desc publicly defined so it's viewable by both album and playerBar templates
 //        @type {Object}
         SongPlayer.currentSong = null;
-        
+		
+        /**
+		* @desc Current playback time (in seconds) of currently playing song
+		* @type {Number}
+		*/
+		SongPlayer.currentTime = null;
+		
 //        @function SongPlayer.play(song)
 //        @desc plays a song from the beginning if the song has not already started and continues playing the song from where it left off if not
 //        @params {Object} song
@@ -112,11 +125,22 @@
                 playSong(song);
             }
         }
+		
+		/**
+		* @function setCurrentTime
+		* @desc Set current time (in seconds) of currently playing song
+		* @param {Number} time
+		*/
+		SongPlayer.setCurrentTime = function(time) {
+			if (currentBuzzObject) {
+				currentBuzzObject.setTime(time);
+			}
+		};
         
         return SongPlayer;
     }
     
     angular
         .module('blocJams')
-        .factory('SongPlayer', SongPlayer);
+        .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
 })();
