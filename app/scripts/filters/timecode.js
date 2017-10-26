@@ -2,8 +2,10 @@
 	 function timecode() {
 		 return function(seconds) {
 			 var seconds = Number.parseFloat(seconds);
+			 
+			 var output = buzz.toTimer(seconds);
 
-			 if (Number.isNaN(seconds)) {
+			 /*if (Number.isNaN(seconds)) {
 				 return '-:--';
 			 }
 
@@ -17,7 +19,7 @@
 				 output += '0';   
 			 }
 
-			 output += remainingSeconds;
+			 output += remainingSeconds;*/
 
 			 return output;
 		 };
